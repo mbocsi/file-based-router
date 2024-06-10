@@ -1,3 +1,5 @@
 # Ignore local files
 *.local*
 
+# Ignore local routes folder (For testing)
+router/*
