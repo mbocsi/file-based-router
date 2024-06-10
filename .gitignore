@@ -2,4 +2,4 @@
 *.local*
 
 # Ignore local routes folder (For testing)
-router/*
+routes/*
