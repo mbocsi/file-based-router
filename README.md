@@ -11,7 +11,8 @@ Outputs binary executable to `bin/fbr`
 
 ### Run
 
-```./fbr
+```
+./fbr
 -port int
 Listening port (default 8080)
 -root string
@@ -25,15 +26,15 @@ Router looks at index.[js/css/html/cgi] files by default unless file name is exp
 
 #### Example
 
- routes -- (root)\
-   api\
+routes -- (root)\
+ │api\
  │ │ index.cgi \
  │ └ foo.cgi \
  │ index.html\
  │ index.js\
  └ style.css
 
-- Request: GET /
+- Request: GET / \
   Returns content of `index.html`
 - Request: GET /styles.css \
   Returns content of `styles.css`
