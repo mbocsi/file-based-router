@@ -11,11 +11,12 @@ Outputs binary executable to `bin/fbr`
 
 ### Run
 
-`./fbr` \
+```./fbr
 -port int
 Listening port (default 8080)
 -root string
 The root route directory (default "routes")
+```
 
 ### File structure
 
@@ -26,18 +27,17 @@ Router looks at index.[js/css/html/cgi] files by default unless file name is exp
 
  routes -- (root)\
    api\
- │ │  index.cgi \
- │ └  foo.cgi \
- │  index.html\
- │  index.js\
- └  style.css \
+ │ │ index.cgi \
+ │ └ foo.cgi \
+ │ index.html\
+ │ index.js\
+ └ style.css
 
-Request: GET / \
-
-- Returns content of `index.html` \
-  Request: GET /styles.css \
-- Returns content of `styles.css` \
-  Request: GET /api \
-- Executes and returns STDOUT of `index.cgi` \
-  Request: POST /api/foo.cgi \
-- Executes and returns STDOUT of `foo.cgi`
+- Request: GET /
+  Returns content of `index.html`
+- Request: GET /styles.css \
+  Returns content of `styles.css`
+- Request: GET /api \
+  Executes and returns STDOUT of `index.cgi`
+- Request: POST /api/foo.cgi \
+  Executes and returns STDOUT of `foo.cgi`
