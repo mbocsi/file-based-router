@@ -19,10 +19,10 @@ func NewFBHandler(root string) http.Handler {
 
 func (h *FBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method, r.URL.Path, r.RemoteAddr)
+	ext := path.Ext(r.URL.Path)
+	p := path.Join(h.root, r.URL.Path)
 	switch r.Method {
 	case "GET":
-		ext := path.Ext(r.URL.Path)
-		p := path.Join(h.root, r.URL.Path)
 		var content []byte
 		if ext != "" {
 			var err error
@@ -90,6 +90,29 @@ func (h *FBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	default:
-		http.Error(w, "Path not found", http.StatusNotFound)
+		if ext != "" && ext != ".cgi" {
+			http.Error(w, "Not found", http.StatusNotFound)
+		}
+		if ext == "" {
+			files, err := os.ReadDir(p)
+			if err != nil {
+				http.Error(w, "Path not found", http.StatusNotFound)
+				return
+			}
+			cgiFile := ""
+			for _, file := range files {
+				if file.Name() == "index.cgi" {
+					cgiFile = file.Name()
+					break
+				}
+			}
+			if cgiFile == "" {
+				http.Error(w, "Not found", http.StatusNotFound)
+				return
+			}
+			p = path.Join(p, cgiFile)
+		}
+		cgiHandler := cgi.Handler{Path: p}
+		cgiHandler.ServeHTTP(w, r)
 	}
 }
