@@ -12,11 +12,12 @@ Outputs binary executable to `bin/fbr`
 ### Run
 
 ```
-./fbr
--port int
-Listening port (default 8080)
--root string
-The root route directory (default "routes")
+./fbr -port=[port] -root=[root dir]
+
+    -port int
+    Listening port (default 8080)
+    -root string
+    The root route directory (default "routes")
 ```
 
 ### File structure
