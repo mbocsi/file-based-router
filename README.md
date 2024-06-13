@@ -26,13 +26,13 @@ Router looks at index.[js/css/html/cgi] files by default unless file name is exp
 
 #### Example
 
-routes -- (root)\
- │api\
- │ │ index.cgi \
- │ └ foo.cgi \
- │ index.html\
- │ index.js\
- └ style.css
+routes/ -- (root)\
+&emsp; api/\
+&emsp;&emsp; index.cgi \
+&emsp;&emsp; foo.cgi \
+&emsp; index.html\
+&emsp; index.js\
+&emsp; style.css
 
 - Request: GET / \
   Returns content of `index.html`
